@@ -197,15 +197,51 @@ function checkedby2(box){
 
 }
 function checkedbycomp(lastmove){
-	if(lastmove!='5' && playedbycomp.indexOf('5')<0 && playedby1.indexOf('5')<0){
-		playedbycomp+='5';
-		$('#5').text(sword2);
-	}
-	else{
+	// if(lastmove!='5' && playedbycomp.indexOf('5')<0 && playedby1.indexOf('5')<0){
+	// 	playedbycomp+='5';
+	// 	$('#5').text(sword2);
+	// }
+	// else{
 
 		if(clickedby1==1){
-			playedbycomp+='9';
-			$('#9').text(sword2);
+			switch(parseInt(lastmove)){
+				case 1:
+				playedbycomp+='9';
+				$('#9').text(sword2);
+				break;
+				case 2:
+				playedbycomp+='5';
+				$('#5').text(sword2);
+				break;
+				case 3:
+				playedbycomp+='7';
+				$('#7').text(sword2);
+				break;
+				case 4:
+				playedbycomp+='5';
+				$('#5').text(sword2);
+				break;
+				case 5:
+				playedbycomp+='9';
+				$('#9').text(sword2);
+				break;
+				case 6:
+				playedbycomp+='8';
+				$('#8').text(sword2);
+				break;
+				case 7:
+				playedbycomp+='3';
+				$('#3').text(sword2);
+				break;
+				case 8:
+				playedbycomp+='5';
+				$('#5').text(sword2);
+				break;
+				case 9:
+				playedbycomp+='1';
+				$('#1').text(sword2);
+				break;
+			}
 		}
 		else{
 
@@ -330,30 +366,9 @@ function checkedbycomp(lastmove){
 					return;
 					}		
 					break;
-				}
-
+					}
+				}		
 			}
-
-				
-
-				
-		
-			}
-
-
-
-	
-		}
-		
-
-
-
-		
-
-
-
-
-
 
 }
 function checkcompwin(){
