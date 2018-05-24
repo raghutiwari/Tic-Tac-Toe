@@ -21,6 +21,7 @@ $('#onep').click(function (){
 		$('.field').fadeOut(800);
 		$('.shape').fadeIn(800);
 		players=1;
+		$('#chance').text('Player 1 Plays');
 		// $('.gamefield').fadeIn(800).addClass('grid');	
 		// $('.options').fadeIn(800);	
 
@@ -29,6 +30,7 @@ $('#twop').click(function (){
 		$('.field').fadeOut(800);
 		$('.shape').fadeIn(800);
 		players=2;
+		$('#chance').text('Player 1 Plays');
 		// console.log(players);
 
 		// $('.gamefield').fadeIn(800).addClass('grid');	
@@ -63,6 +65,8 @@ $('#reset').click(function(){
 		playedbycomp='';
 		clickedby1=0;
 		clickedby2=0;
+		clicked=0;
+		count=0;
 		$('.options').fadeOut(800);
 		$('.gamefield').fadeOut(10);
 		$('.gamefield').removeClass('grid');
@@ -82,6 +86,7 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 	if(winner==0){
 
 		if(turn ==1){
+				$('#chance').text('Player 2 Plays');
 				$(this).text(sword1);
 				// console.log(this.id);
 				checkedby1(this.id);
@@ -89,24 +94,36 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 				if(winner==1){
 					clicked=0;
 					alert('Player '+ winner + ' wins!!');
-
+					reset();
+					turn=1;
+					return;
 
 				}
 				else if(winner==0 && clicked==9){
 					alert('Match Drawn!');
+					reset();
+					turn=1;
+					return;
 				}
 
 		}
 		else if(turn==2){
+			$('#chance').text('Player 1 Plays');
 			$(this).text(sword2);
 			checkedby2(this.id);
 			turn=1;
 			if(winner==2){
 				clicked=0;
 				alert('Player '+ winner + ' wins!!');
+				reset();
+				turn=1;
+				return;
 			}
 			else if(winner==0 && clicked==9){
 					alert('Match Drawn!');
+					reset();
+					turn=1;
+					return;
 				}			
 		}
 	}
@@ -122,6 +139,7 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 						if(winner==0){
 
 							if(turn ==1){
+									$('#chance').text('Computer Plays');
 									clickedby1++;
 									$(this).text(sword1);
 									// console.log(this.id);
@@ -130,19 +148,27 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 									if(winner==1){
 										clicked=0;
 										alert('Player '+ winner + ' wins!!');
+										reset();
+										turn=1;
 										return;
 
 									}
 											
 										checkedbycomp(this.id);
+										$('#chance').text('Player 1 Plays');
 										turn=1;
 									if(winner==2){
 										clickedby1=0;
 										alert('Computer Wins!');
+										reset();
+										turn=1;
 										return;
 									}
 									else if(winner==0 && clickedby1==5){
 										alert('Match Drawn!');
+										reset();
+										turn=1;
+										return;
 									}
 									//delay;
 
@@ -369,6 +395,24 @@ function checkedbycomp(lastmove){
 					}
 				}		
 			}
+
+}
+function reset(){
+		winner=0;
+		turn=1;
+		playedby1='';
+		playedby2='';
+		playedbycomp='';
+		clickedby1=0;
+		clickedby2=0;
+		clicked=0;
+		$('.options').fadeOut(800);
+		$('.gamefield').fadeOut(10);
+		$('.gamefield').removeClass('grid');
+		$('.field').fadeIn(800);
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').text('place');
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').data('editor-disabled',false);	
+
 
 }
 function checkcompwin(){
