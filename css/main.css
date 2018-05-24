@@ -53,6 +53,7 @@ background: linear-gradient(to right,#00B4DB,#0083B0);
 	height: 300px;
 }
 .options{
+
 	margin-top: 2%;
 
 }
@@ -92,7 +93,8 @@ display: none;
   vertical-align: middle;
 }
 .shape{
-		position: absolute;
+	font-weight: bold;
+	position: absolute;
 	width: 400px;
 	height: 400px;
 	top: 0;
@@ -100,17 +102,18 @@ display: none;
 	left: 0;
 	right: 0;
 	margin: auto;
+	box-shadow: 1px 1px 15px 2px black;
 	background-color: white;
 	width: 200px;
 	height: 200px;
 }
 .won{
 	color: black !important;
-	background: linear-gradient(to right,#AAFFA9,#11FFBD) !important;
+	background: linear-gradient(to right,#00c6ff,#0072ff) !important;
 }
 #onep, #twop, #cross, #zero, #reset{
 	color: white;
-	background: linear-gradient(to right,#000428,#004e92);
+	background: linear-gradient(to right,#005C97,#363795);
 }
 #choose{
 	color: black !important;
