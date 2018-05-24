@@ -15,6 +15,9 @@ var clickedby1=0;
 var clickedby2=0;
 var count=0;
 var flag=[0,0,0];
+var won1list=[];
+var won2list=[];
+var complist=[];
 $(document).ready(function(){
 
 $('#onep').click(function (){
@@ -71,7 +74,8 @@ $('#reset').click(function(){
 		$('.gamefield').fadeOut(10);
 		$('.gamefield').removeClass('grid');
 		$('.field').fadeIn(800);
-		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').text('place');
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').text('-');
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').removeClass('won');
 		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').data('editor-disabled',false);
 
 
@@ -89,11 +93,15 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 				$('#chance').text('Player 2 Plays');
 				$(this).text(sword1);
 				// console.log(this.id);
-				checkedby1(this.id);
+				won1list=checkedby1(this.id);
 				turn=2;				
 				if(winner==1){
 					clicked=0;
+					$('#'+won1list[0]).addClass('won');
+					$('#'+won1list[1]).addClass('won');
+					$('#'+won1list[2]).addClass('won');
 					alert('Player '+ winner + ' wins!!');
+					wait(500);
 					reset();
 					turn=1;
 					return;
@@ -101,6 +109,7 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 				}
 				else if(winner==0 && clicked==9){
 					alert('Match Drawn!');
+					wait(500);
 					reset();
 					turn=1;
 					return;
@@ -110,17 +119,23 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 		else if(turn==2){
 			$('#chance').text('Player 1 Plays');
 			$(this).text(sword2);
-			checkedby2(this.id);
+			won2list=checkedby2(this.id);
 			turn=1;
 			if(winner==2){
 				clicked=0;
+					$('#'+won2list[0]).addClass('won');
+					$('#'+won2list[1]).addClass('won');
+					$('#'+won2list[2]).addClass('won');
 				alert('Player '+ winner + ' wins!!');
+				wait(500);
 				reset();
 				turn=1;
 				return;
 			}
 			else if(winner==0 && clicked==9){
+
 					alert('Match Drawn!');
+					wait(500);
 					reset();
 					turn=1;
 					return;
@@ -143,31 +158,39 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 									clickedby1++;
 									$(this).text(sword1);
 									// console.log(this.id);
-									checkedby1(this.id);
-									turn=2;				
+									won1list=checkedby1(this.id);
+									// turn=2;				
 									if(winner==1){
 										clicked=0;
+										$('#'+won1list[0]).addClass('won');
+										$('#'+won1list[1]).addClass('won');
+										$('#'+won1list[2]).addClass('won');
 										alert('Player '+ winner + ' wins!!');
+										wait(500);
 										reset();
-										turn=1;
+										// turn=1;
 										return;
 
-									}
-											
-										checkedbycomp(this.id);
+										}
+										complist=checkedbycomp(this.id);
 										$('#chance').text('Player 1 Plays');
-										turn=1;
+										// turn=1;
 									if(winner==2){
 										clickedby1=0;
+										$('#'+complist[0]).addClass('won');
+										$('#'+complist[1]).addClass('won');
+										$('#'+complist[2]).addClass('won');
 										alert('Computer Wins!');
+										wait(500);
 										reset();
-										turn=1;
+										// turn=1;
 										return;
 									}
 									else if(winner==0 && clickedby1==5){
 										alert('Match Drawn!');
+										wait(500);
 										reset();
-										turn=1;
+										// turn=1;
 										return;
 									}
 									//delay;
@@ -196,26 +219,39 @@ $('#1,#2,#3,#4,#5,#6,#7,#8,#9').on('click',function(){
 
 function checkedby1(box){
 	playedby1+=box;
+	var won=[];
 	for(var i=0;i<winn.length;i++){
 
 		if(playedby1.indexOf(winn[i][0])>=0 && playedby1.indexOf(winn[i][1])>=0 && playedby1.indexOf(winn[i][2])>=0){
 				console.log("Player 1 Wins");
+				won[0]=winn[i][0];
+				won[1]=winn[i][1];
+				won[2]=winn[i][2];
+				console.log(won);
 				winner=1;
-				return;
-		}
+				return won;
+			}
 
 
 	}
+	return;
 
 }
 function checkedby2(box){
 	playedby2+=box;
+	var won=[];
 		for(var i=0;i<winn.length;i++){
 
 		if(playedby2.indexOf(winn[i][0])>=0 && playedby2.indexOf(winn[i][1])>=0 && playedby2.indexOf(winn[i][2])>=0){
 				console.log("Player 2 Wins");
+				won[0]=winn[i][0];
+				won[1]=winn[i][1];
+				won[2]=winn[i][2];
+				console.log(won);
+				// $('#'+winn[i][0],'#'+winn[i][1],'#'+winn[i][2]).css('background-color','green');
+				
 				winner=2;
-				return;
+				return won;
 		}
 
 
@@ -228,7 +264,7 @@ function checkedbycomp(lastmove){
 	// 	$('#5').text(sword2);
 	// }
 	// else{
-
+		var woncomp=[];
 		if(clickedby1==1){
 			switch(parseInt(lastmove)){
 				case 1:
@@ -285,8 +321,8 @@ function checkedbycomp(lastmove){
 						if(flag[k]==0 && playedbycomp.indexOf(winn[i][k])<0 && playedby1.indexOf(winn[i][k])<0){
 							playedbycomp+=winn[i][k];
 							$('#'+winn[i][k]).text(sword2);
-							checkcompwin();
-							return;
+							woncomp=checkcompwin();
+							return woncomp;
 						}
 					}
 				}
@@ -306,8 +342,8 @@ function checkedbycomp(lastmove){
 						if(flag[k]==0 && playedbycomp.indexOf(winn[i][k])<0 && playedby1.indexOf(winn[i][k])<0){
 							playedbycomp+=winn[i][k];
 							$('#'+winn[i][k]).text(sword2);
-							checkcompwin();
-							return;
+							woncomp=checkcompwin();
+							return woncomp;
 						}
 					}
 				}
@@ -319,24 +355,24 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}
 					break;				
 					case 3:
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}			
 					break;
 					case 7:
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}			
 					break;
 
@@ -344,16 +380,16 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}
 					break;
 					case 2:
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}
 					
 					break;
@@ -361,8 +397,8 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}
 					
 					break;
@@ -370,8 +406,8 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}	
 									
 					break;
@@ -379,8 +415,8 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}
 										
 					break;
@@ -388,8 +424,8 @@ function checkedbycomp(lastmove){
 					if(playedbycomp.indexOf(i.toString())<0&&playedby1.indexOf(i.toString())<0){
 					playedbycomp+=i.toString();
 					$('#'+i.toString()).text(sword2);
-					checkcompwin();
-					return;
+					woncomp=checkcompwin();
+					return woncomp;
 					}		
 					break;
 					}
@@ -410,24 +446,38 @@ function reset(){
 		$('.gamefield').fadeOut(10);
 		$('.gamefield').removeClass('grid');
 		$('.field').fadeIn(800);
-		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').text('place');
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').text('-');
+		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').removeClass('won');
 		$('#1,#2,#3,#4,#5,#6,#7,#8,#9').data('editor-disabled',false);	
 
 
 }
 function checkcompwin(){
 	console.log('Total Played: '+ playedbycomp);
+	var won=[];
 		for(var i=0;i<winn.length;i++){
 
 		if(playedbycomp.indexOf(winn[i][0])>=0 && playedbycomp.indexOf(winn[i][1])>=0 && playedbycomp.indexOf(winn[i][2])>=0){
 				console.log("Player 2 Wins");
+				
+				won[0]=winn[i][0];
+				won[1]=winn[i][1];
+				won[2]=winn[i][2];
 				winner=2;
-				return;
+				
+				return won;
 		}
 
 
 	}
 
+}
+function wait(ms){
+var start = new Date().getTime();
+var end = start;
+while(end<start+ms){
+	end= new Date().getTime();
+}
 }
 
 });

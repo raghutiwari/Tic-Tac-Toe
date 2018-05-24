@@ -1,7 +1,12 @@
-html, body{
-width: 1000px;
-height: 700px;
+ @import url('https://fonts.googleapis.com/css?family=Poiret+One');
 
+html, body{
+font-family: 'Poiret One', cursive;
+color: white;
+width: 1280px;
+height:	500px;	
+margin:auto;
+background: linear-gradient(to right,#00B4DB,#0083B0);
 }
 
 .gamezone{
@@ -13,7 +18,8 @@ height: 700px;
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-color: orange;
+	box-shadow: 1px 1px 15px 2px black;
+	background: linear-gradient(to right,#0F2027,#203A43,#2C5364);
 	width: 400px;
 	height: 400px;
 }
@@ -26,7 +32,8 @@ height: 700px;
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-color: white;
+	box-shadow: 1px 1px 15px 2px black;
+	background: linear-gradient(to right, #EAEAEA,#F2F2F2);
 	width: 200px;
 	height: 200px;
 }
@@ -40,12 +47,14 @@ height: 700px;
 	left: 0;
 	right: 0;
 	margin: auto;
+	box-shadow: 1px 1px 15px 2px black;
 	background-color: white;
 	width: 300px;
 	height: 300px;
 }
 .options{
 	margin-top: 2%;
+
 }
 .player{
 	margin-top:20%;
@@ -55,6 +64,7 @@ height: 700px;
 }
 .gamefield{
 	display: grid;
+	box-shadow: 1px 1px 15px 2px black;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 2vw; 
@@ -75,8 +85,11 @@ display: none;
 }
 .grid > div {
   padding: .5em;
-  background: grey;
+  background: black;
+  color: white;	
   text-align: center;
+  font-size: 200%;
+  vertical-align: middle;
 }
 .shape{
 		position: absolute;
@@ -91,4 +104,16 @@ display: none;
 	width: 200px;
 	height: 200px;
 }
+.won{
+	color: black !important;
+	background: linear-gradient(to right,#AAFFA9,#11FFBD) !important;
+}
+#onep, #twop, #cross, #zero, #reset{
+	color: white;
+	background: linear-gradient(to right,#000428,#004e92);
+}
+#choose{
+	color: black !important;
+}
 
+}
